@@ -45,7 +45,7 @@ export default function CollectionPage() {
     const card = cardGroups[rarity][Math.floor(Math.random() * cardGroups[rarity].length)];
 
     // check for existing id in packHistory
-    let found = packHistory.find((item: { id: string }) => item.id === card.id);
+    const found = packHistory.find((item: { id: string }) => item.id === card.id);
     if (found) {
       // update picked count
       found.picked += 1;
@@ -83,7 +83,7 @@ export default function CollectionPage() {
     // set timedate of pick
     localStorage.setItem(`${setId}-opened`, new Date().toISOString());
 
-    let cards = [];
+    const cards = [];
 
     if (pack === "rp") {
       for (let i = 0; i < noOfCards; i++) {
@@ -170,18 +170,14 @@ export default function CollectionPage() {
       </div>
 
       <div>
-        <p className="text-2xl font-bold mb-5">Cards you've collected:</p>
-        {/* Use your data here */}
+        <p className="text-2xl font-bold mb-5">Cards collected:</p>
         <div className="card-grid">
         {testCards.data.map((card) => {
-
-          let cardPicked = packHistory.find(item => item.id === card.id);
-
           return (
             <Card
               key={card.id}
               card={card}
-              cardPicked={cardPicked}
+              cardPicked={packHistory.find(item => item.id === card.id)}
             />
           )
         })}
