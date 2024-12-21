@@ -15,13 +15,7 @@ import {
 
 import testCards from "../../public/datasets/sv3pt5.json";
 
-interface Props {
-  params: {
-    id: string;
-  };
-}
-
-export default function CollectionPage({ params }: Props) {
+export default function CollectionPage() {
   const { setPickedCards } = useContext(GlobalStateContext);
 
   const [packHistory, setPackHistory] = useState<
