@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import { GlobalStateProvider } from "../contexts/globalStateContext";
+import Footer from "../components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,9 +34,7 @@ export default function RootLayout({
         <GlobalStateProvider>
           <Header />
           {children}
-          <footer>
-            <p className="text-sm text-gray-500 text-center mt-10 mb-5">This website is not produced, endorsed, supported, or affiliated with Nintendo or The Pokémon Company.</p>
-          </footer>
+          <Footer />
         </GlobalStateProvider>
       </body>
     </html>
@@ -43,15 +42,5 @@ export default function RootLayout({
 }
 
 function Header() {
-  return (
-    <header className="mt-5 mb-5">
-      <nav>
-        <ul>
-          <li>
-            <Link className="btn bg-orange-600 p-2" href="/">Home</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
+  return null;
 }

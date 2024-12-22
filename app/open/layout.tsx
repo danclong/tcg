@@ -3,5 +3,5 @@ export default function CollectionLayout({
 }: {
     children: React.ReactNode;
 }) {
-    return <section>{children}</section>;
+    return <section className="card-stack-container">{children}</section>;
 }

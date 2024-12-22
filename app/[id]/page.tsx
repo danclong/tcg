@@ -161,17 +161,17 @@ export default function CollectionPage() {
 
   return (
     <>
-      <div className="header mt-5 mb-5">
+      <div className="header mt-5 mb-5 text-center">
         {canOpen ? (
-          <Link className="btn bg-orange-600 p-2" href="/open" onClick={handlePickCards}>Open a pack</Link>
+          <Link className="btn bg-orange-500 p-2 rounded-md" href="/open" onClick={handlePickCards}>Open a pack</Link>
         ) : (
-          <p>Please wait {timeRemaining} before opening next pack</p>
+          <p className="text-center text-sm">Please wait {timeRemaining} before opening next pack</p>
         )}
       </div>
 
-      <div>
-        <p className="text-2xl font-bold mb-5">Cards collected:</p>
-        <div className="card-grid">
+      <div className="pl-4 pr-4">
+        <p className="text-lg mb-5 text-center">Cards collected: <span className="font-bold">{packHistory.length} / {testCards.data.length}</span></p>
+        <div className="card-grid grid grid-cols-3 gap-4 md:grid-cols-5 md:gap-3">
         {testCards.data.map((card) => {
           return (
             <Card

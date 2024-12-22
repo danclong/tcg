@@ -51,8 +51,6 @@ export default function OpenPage() {
             </SwiperSlide>
           ))}
         </Swiper>
-
-        <Link href="/sv3pt5" className="btn bg-orange-600 p-2 mt-10">See your deck</Link>
       </div>
     </>
   );
