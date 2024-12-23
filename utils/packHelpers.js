@@ -5,6 +5,8 @@ const getPackType = () => {
   } else if (packChance <= 1) {
     return "gp";
   }
+
+  return "rp";
 };
 
 const getRarityTypes = [

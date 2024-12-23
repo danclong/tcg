@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useContext } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { GlobalStateContext } from "../../contexts/globalStateContext";
 
@@ -16,14 +16,17 @@ import {
 import testCards from "../../public/datasets/sv3pt5.json";
 
 export default function CollectionPage() {
-  const { setPickedCards } = useContext(GlobalStateContext);
+  const router = useRouter();
+
+  const { setPickedCards, setPackType, newCards, setNewCards } = useContext(GlobalStateContext);
 
   const [packHistory, setPackHistory] = useState<
     Array<{ id: string; picked: number }>
   >([]);
   const [canOpen, setCanOpen] = useState(false);
   const [lastOpenTime, setLastOpenTime] = useState<string | null>(null);
-  const [timeRemaining, setTimeRemaining] = useState("");
+  const [timeRemaining, setTimeRemaining] = useState(""); // default to pack interval
+  const [loading, setLoading] = useState(true); // start on loading screen
 
   // rarity types from card data
   const setId = "sv3pt5";
@@ -49,6 +52,7 @@ export default function CollectionPage() {
     if (found) {
       // update picked count
       found.picked += 1;
+      setNewCards([...newCards, card]);
     } else {
       // add new item to packHistory
       packHistory.push({ id: card.id, picked: 1 });
@@ -88,15 +92,18 @@ export default function CollectionPage() {
     if (pack === "rp") {
       for (let i = 0; i < noOfCards; i++) {
         const rarity = randomPick(rarityTypes);
-        cards.push(pickCard(rarity.name));
+        const pickedCard = pickCard(rarity.name);
+        cards.push(pickedCard);
       }
     } else if (pack === "gp") {
       for (let i = 0; i < noOfCards; i++) {
         const rarity = randomPick(godPackTypes);
-        cards.push(pickCard(rarity.name));
+        const pickedCard = pickCard(rarity.name);
+        cards.push(pickedCard);
       }
     }
 
+    setPackType(pack);
     setPickedCards(cards);
   };
 
@@ -121,6 +128,7 @@ export default function CollectionPage() {
     setPackHistory(JSON.parse(localStorage.getItem(setId) || "[]"));
     setCanOpen(canOpenPack());
     setLastOpenTime(localStorage.getItem(`${setId}-opened`));
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -154,24 +162,29 @@ export default function CollectionPage() {
   }, [lastOpenTime]);
 
   const handlePickCards = () => {
+    setNewCards([]);
+    setLoading(true);
+
     pickCards();
     setLastOpenTime(new Date().toISOString());
     setCanOpen(false);
-  };
+
+    router.push("/open");
+  }
 
   return (
     <>
-      <div className="header mt-5 mb-5 text-center">
+      <div className={`header text-center fixed z-50 top-2 left-2 ${loading ? 'opacity-0' : ''}`}>
         {canOpen ? (
-          <Link className="btn bg-orange-500 p-2 rounded-md" href="/open" onClick={handlePickCards}>Open a pack</Link>
+          <button className="btn bg-pink-500 text-white text-md p-2 rounded-md" onClick={handlePickCards}>Open a pack</button>
         ) : (
-          <p className="text-center text-sm">Please wait {timeRemaining} before opening next pack</p>
+          <p className="text-center text-sm">{timeRemaining && `Please wait ${timeRemaining} before opening next pack`}</p>
         )}
       </div>
 
-      <div className="pl-4 pr-4">
+      <div className={`pl-4 pr-4 pt-10 ${loading ? 'opacity-0' : ''}`}>
         <p className="text-lg mb-5 text-center">Cards collected: <span className="font-bold">{packHistory.length} / {testCards.data.length}</span></p>
-        <div className="card-grid grid grid-cols-3 gap-4 md:grid-cols-5 md:gap-3">
+        <div className={`card-grid grid grid-cols-3 gap-4 md:grid-cols-5 md:gap-3`}>
         {testCards.data.map((card) => {
           return (
             <Card
@@ -181,6 +194,7 @@ export default function CollectionPage() {
             />
           )
         })}
+        {/* {loading && <div className="loading"></div>} */}
       </div>
       </div>
     </>
