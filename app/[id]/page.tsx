@@ -182,9 +182,9 @@ export default function CollectionPage() {
         )}
       </div>
 
-      <div className={`pl-4 pr-4 pt-10 ${loading ? 'opacity-0' : ''}`}>
+      <div className={`pl-4 pr-4 pt-16 ${loading ? 'opacity-0' : ''}`}>
         <p className="text-lg mb-5 text-center">Cards collected: <span className="font-bold">{packHistory.length} / {testCards.data.length}</span></p>
-        <div className={`card-grid grid grid-cols-3 gap-4 md:grid-cols-5 md:gap-3`}>
+        <div className={`card-grid grid grid-cols-3 gap-2 md:grid-cols-5 md:gap-3`}>
         {testCards.data.map((card) => {
           return (
             <Card

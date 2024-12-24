@@ -29,7 +29,27 @@ export default function Footer() {
                 <button className="close-button" onClick={() => setOpen(false)}>
                     <span className="sr-only">Close</span>
                 </button>
-                <p className="text-sm text-gray-500 text-center">This website is not produced, endorsed, supported, or affiliated with Nintendo or The Pokémon Company.</p>
+                <div className="mb-5">
+                    <p className="text-lg font-bold text-gray-800">Pack selection probability</p>
+                    <ul className="list-none">
+                        <li className="mb-1 text-gray-700">Regular pack: <strong className="font-bold">99.95%</strong></li>
+                        <li className="mb-1 text-gray-700">God pack: <strong className="font-bold">0.05%</strong></li>
+                    </ul>
+                </div>
+                <div className="mb-5">
+                    <p className="text-lg font-bold text-gray-800">Card rarity probability</p>
+                    <ul className="list-none">
+                        <li className="mb-1 text-gray-700">Common: <strong className="font-bold">50%</strong></li>
+                        <li className="mb-1 text-gray-700">Uncommon: <strong className="font-bold">35%</strong></li>
+                        <li className="mb-1 text-gray-700">Rare: <strong className="font-bold">10%</strong></li>
+                        <li className="mb-1 text-gray-700">Ultra Rare: <strong className="font-bold">1.5%</strong></li>
+                        <li className="mb-1 text-gray-700">Illustration Rare: <strong className="font-bold">1%</strong></li>
+                        <li className="mb-1 text-gray-700">Double Rare: <strong className="font-bold">1%</strong></li>
+                        <li className="mb-1 text-gray-700">Special Illustration Rare: <strong className="font-bold">1%</strong></li>
+                        <li className="mb-1 text-gray-700">Hyper Rare: <strong className="font-bold">0.5%</strong></li>
+                    </ul>
+                </div>
+                <p className="text-sm text-gray-500">This website is not produced, endorsed, supported, or affiliated with Nintendo or The Pokémon Company.</p>
                 </div>
             </div>
         </>
