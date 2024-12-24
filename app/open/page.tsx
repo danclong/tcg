@@ -30,8 +30,8 @@ export default function OpenPage() {
     setLoading(false);
   }, 1000);
 
-  console.log(pickedCards);
-  console.log(newCards);
+  // console.log(pickedCards);
+  // console.log(newCards);
 
   // TODO:
   // Change background UI depending on card.types[0]
@@ -50,7 +50,7 @@ export default function OpenPage() {
           onSlideChange={(swiper) => {
             const slide = swiper.activeIndex;
             const card = pickedCards[slide];
-            console.log(card);
+            // console.log(card);
           }}
         >
           {pickedCards.map((card: any, index: number) => (
