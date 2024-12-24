@@ -44,10 +44,10 @@ export default function OpenPage() {
           effect="cards"
           slidesPerView={1}
           centeredSlides={true}
-          onSlideChange={(swiper) => {
-            // const slide = swiper.activeIndex;
-            // const card = pickedCards[slide];
-          }}
+          // onSlideChange={(swiper) => {
+          //   const slide = swiper.activeIndex;
+          //   const card = pickedCards[slide];
+          // }}
         >
           {pickedCards.map((card: any, index: number) => (
             <SwiperSlide
