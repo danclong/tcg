@@ -18,7 +18,7 @@ export default function OpenPage() {
 
   const router = useRouter();
 
-  const { pickedCards, newCards } = useContext(GlobalStateContext);
+  const { pickedCards } = useContext(GlobalStateContext);
 
   useEffect(() => {
     if (pickedCards.length === 0) {
@@ -29,9 +29,6 @@ export default function OpenPage() {
   setTimeout(() => {
     setLoading(false);
   }, 1000);
-
-  // console.log(pickedCards);
-  // console.log(newCards);
 
   // TODO:
   // Change background UI depending on card.types[0]
@@ -48,9 +45,8 @@ export default function OpenPage() {
           slidesPerView={1}
           centeredSlides={true}
           onSlideChange={(swiper) => {
-            const slide = swiper.activeIndex;
-            const card = pickedCards[slide];
-            // console.log(card);
+            // const slide = swiper.activeIndex;
+            // const card = pickedCards[slide];
           }}
         >
           {pickedCards.map((card: any, index: number) => (
